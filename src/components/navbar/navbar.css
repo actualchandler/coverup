@@ -1,0 +1,37 @@
+
+.main-nav {
+   text-align: center;
+   list-style: none;
+   box-sizing: border-box;
+   height: 60px;  
+   background-color: #1E1B1C;
+   padding-top: 10px;
+   font-family: 'Raleway', sans-serif;
+   font-size: 150%;
+}
+
+ .main-nav li {
+   display: inline-block;
+   margin-left: 80px;
+   color: #fff;
+}
+
+.main-nav li:first-child {
+   margin-left: 0px;
+}
+
+.main-nav img {
+   padding: 0px 50px;
+   height: 45px;
+   width: auto;
+
+}
+
+.main-nav li:hover {
+  transform: scale(1.1);
+}
+
+.main-nav li a:link,
+.main-nav li a:visited {
+   color: #fff;
+}
