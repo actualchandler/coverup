@@ -22,14 +22,14 @@ export const makeMainRoutes = () => {
    return (
       <Provider store={createStoreWithMiddleware(reducers)}>
          <BrowserRouter>
-            <div>
+         <div>
                <NavBar/>
                <Route exact path='/' component ={ Home } />
                <Route exact path='/about' component ={ About } />
                <Route exact path='/catalog' component ={ Catalog } />
                <Route exact path='/contact' component ={ Contact } />
                <Route exact path='/shop' component ={ Shop } />
-            </div>
+         </div>
          </BrowserRouter>
       </Provider>
    )

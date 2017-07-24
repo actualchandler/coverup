@@ -3,7 +3,7 @@
    text-align: center;
    list-style: none;
    box-sizing: border-box;
-   height: 60px;  
+   height: 75px;  
    background-color: #1E1B1C;
    padding-top: 10px;
    font-family: 'Raleway', sans-serif;
@@ -22,7 +22,7 @@
 
 .main-nav img {
    padding: 0px 50px;
-   height: 45px;
+   height: 55px;
    width: auto;
 
 }

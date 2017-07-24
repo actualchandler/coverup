@@ -1,0 +1,24 @@
+
+.vid {
+   width:100%;
+   height: auto;
+   background-color: #fff;
+   padding-bottom: 30px;
+}
+
+.vid-border {
+   border: 0;
+}
+
+h1 {
+   padding-bottom: 15px;
+   font-weight: 400;
+}
+
+.intro {
+   float: left;
+}
+
+.intro:last-child {
+   float: right;
+}
