@@ -10,15 +10,14 @@
    border: 0;
 }
 
-h1 {
-   padding-bottom: 15px;
-   font-weight: 400;
-}
-
 .intro {
    float: left;
+   padding-top: 15px;
+   padding-bottom: 15px;
+   font-weight: 400;
+   font-size: 200%;
 }
 
-.intro:last-child {
+.intro-last {
    float: right;
 }

@@ -4,7 +4,7 @@
    list-style: none;
    box-sizing: border-box;
    height: 75px;  
-   background-color: #1E1B1C;
+   background-color: rgb(30, 30, 30);
    padding-top: 10px;
    font-family: 'Raleway', sans-serif;
    font-size: 150%;
@@ -34,4 +34,8 @@
 .main-nav li a:link,
 .main-nav li a:visited {
    color: #fff;
+}
+
+.ulfix {
+  padding-left: 0px
 }

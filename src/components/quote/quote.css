@@ -1,0 +1,17 @@
+.quote {
+   padding-top: 60px;
+   padding-bottom: 60px;
+   text-align: center;
+   width:100%;
+   height: auto;
+   background-color: #024db3;
+   color: #fff;
+}
+
+.contact {
+   font-size: 250%;
+}
+
+.info {
+   font-size: 150%;
+}

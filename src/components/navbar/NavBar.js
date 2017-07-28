@@ -5,7 +5,7 @@ class NavBar extends Component {
   render() {
     return (
       <div className="row main-nav">
-        <ul>
+        <ul className="ulfix">
           <li><a href='/catalog'>Catalogs</a></li>
           <li><a href='https://www.agpestores.com/coverup/groups.php' target="_blank">Shop</a></li>
           <li><a href='/'><img src={ require('../../img/nav-logo.png') } alt="Cover Up"></img></a></li>
