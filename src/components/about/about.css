@@ -1,0 +1,21 @@
+.four-head {
+   width: 100%;
+   height: auto;
+   padding-top: 15px;
+}
+
+.title {
+   font-size: 18px;
+   color: blue;
+   padding-top: 15px;
+   padding-bottom: 15px;
+}
+
+.content {
+   line-height: 175%;
+   font-size: 15px;
+}
+
+.content-last {
+   padding-bottom: 15px;
+}

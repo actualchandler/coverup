@@ -1,18 +1,5 @@
 
 
-h1, h2, h3, h4, h5, h6 {
-   font-family:  'Raleway', sans-serif;
-}
-
-h3, h1 {
-   text-align: center;
-}
-
-h1 {
-   padding-bottom: 15px;
-   font-weight: 400;
-}
-
 .header-text {
    font-size: 250%;
 }
@@ -27,7 +14,7 @@ h1 {
    width: 50px;
    height: 50px;
    border-radius: 50%;
-   background-color: #002F82;
+   background-color: #024db3;
    padding: 8px 8px;
    margin-left: 43%;
 }
@@ -39,7 +26,7 @@ h1 {
 
 .service-icon li {
    list-style: none;
-   color: blue;
+   color: #024db3;
 }
 
 .list {

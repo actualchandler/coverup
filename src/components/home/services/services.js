@@ -7,7 +7,7 @@ export default class Services extends Component{
       return (
          <div className="services">
             <div className="row">
-               <h1 className="header-text">Services</h1>
+               <p className="header-h1">Services</p>
             </div>
             <div className="row">
                <div className="col-md-4">
