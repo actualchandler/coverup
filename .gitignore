@@ -22,3 +22,7 @@ yarn-error.log*
 
 # files
 config.js
+auth0-variables.js
+
+
+
