@@ -22,12 +22,12 @@ app.use(session({
 }))
 
 // MASSIVE AND DB SETUP
-let massiveUri = config.MASSIVE_URI;
+let massiveUri = config.MASSIVE_URI
 let massiveServer = massive.connectSync({
 	connectionString: massiveUri
-});
+})
 
-app.set('db', massiveServer);
+app.set('db', massiveServer)
 let db = app.get('db')
 
 let dbSetup = require('./services/dbSetup')
@@ -84,16 +84,17 @@ app.get('/api/me', userCtrl.me)
 app.put('/api/user/current', isAuthed, userCtrl.update_current)
 
 // ORDER ENDPOINTS //
-app.put('/api/order/complete', isAuthed, orderCtrl.complete, orderCtrl.read);
-app.get('/api/order/history', isAuthed, orderCtrl.orderHistory);
-app.get('/api/order', isAuthed, orderCtrl.read);
-app.post('/api/order/add', isAuthed, orderCtrl.addToCart);
-app.put('/api/order/update/:id', isAuthed, orderCtrl.updateItemInCart);
-app.delete('/api/order/delete/:id', isAuthed, orderCtrl.deleteFromCart);
+app.put('/api/order/complete', isAuthed, orderCtrl.complete, orderCtrl.read)
+app.get('/api/order/history', isAuthed, orderCtrl.orderHistory)
+app.get('/api/order', isAuthed, orderCtrl.read)
+app.post('/api/order/add', isAuthed, orderCtrl.addToCart)
+app.put('/api/order/update/:id', isAuthed, orderCtrl.updateItemInCart)
+app.delete('/api/order/delete/:id', isAuthed, orderCtrl.deleteFromCart)
 
-// PODUCTS ENDPOINTS //
-app.get('/api/products', productCtrl.read);
-app.get('/api/product/:id', productCtrl.read_id);
+// PRODUCTS ENDPOINTS //
+app.get('/api/products/:shop', productCtrl.read_shop)
+app.get('/api/product/:id', productCtrl.read_id)
+app.post('/api/product/new', productCtrl.create)
 
 
 
