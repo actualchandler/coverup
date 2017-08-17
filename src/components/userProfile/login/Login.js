@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Navbar, Button } from 'react-bootstrap'
+import { Button } from 'react-bootstrap';
+import './login.css';
 
 class App extends Component {
   goTo(route) {
@@ -18,23 +19,11 @@ class App extends Component {
     const { isAuthenticated } = this.props.auth;
 
     return (
-      <div>
-        <Navbar fluid>
-          <Navbar.Header>
-            <Navbar.Brand>
-              <a href="#">Auth0 - React</a>
-            </Navbar.Brand>
-            <Button
-              bsStyle="primary"
-              className="btn-margin"
-              onClick={this.goTo.bind(this, 'home')}
-            >
-              Home
-            </Button>
+      <div className="set-index">
             {
               !isAuthenticated() && (
                   <Button
-                    bsStyle="primary"
+                    bsStyle="default"
                     className="btn-margin"
                     onClick={this.login.bind(this)}
                   >
@@ -45,27 +34,14 @@ class App extends Component {
             {
               isAuthenticated() && (
                   <Button
-                    bsStyle="primary"
+                    bsStyle="default"
                     className="btn-margin"
                     onClick={this.goTo.bind(this, 'profile')}
                   >
-                    Profile
+                    Account
                   </Button>
                 )
             }
-            {
-              isAuthenticated() && (
-                  <Button
-                    bsStyle="primary"
-                    className="btn-margin"
-                    onClick={this.logout.bind(this)}
-                  >
-                    Log Out
-                  </Button>
-                )
-            }
-          </Navbar.Header>
-        </Navbar>
         <div className="container">
           {this.props.children}
         </div>

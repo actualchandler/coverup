@@ -1,8 +1,9 @@
 import React from 'react'
+import ReduxPromise from 'redux-promise'
 import { Redirect, Route, BrowserRouter } from 'react-router-dom'
 import { createStore, applyMiddleware } from 'redux'
-import ReduxPromise from 'redux-promise'
 import { Provider } from 'react-redux'
+
 import reducers from './reducers'
 
 import './my-reset.css'
@@ -16,12 +17,17 @@ import Catalog from './components/catalog/Catalog'
 import Shop from './components/shop/Shop'
 import Profile from './components/userProfile/Profile'
 
+// *** Shop Routes ***
+import Products from './components/shop/Products'
+import ProductDetails from './components/shop/ProductDetails'
+import AddProduct from './components/shop/AddProduct'
+
 // *** Authentication ***
 import Auth from './auth/Auth/Auth'
 import Callback from './auth/Callback/Callback'
 import history from './history'
 
-import App from './App'
+import App from './components/userProfile/login/Login'
 
 const auth = new Auth()
 
@@ -40,10 +46,11 @@ export const makeMainRoutes = () => {
         <BrowserRouter history={history}>
         <div>
           <NavBar />
-          <Route exact path="/home" render={(props) => <Home auth={auth} {...props} />} />
+          <Route path="/" render={(props) => <App auth={auth} {...props} />} /> 
+          <Route exact path="/" render={(props) => <Home auth={auth} {...props} />} />
           <Route exact path="/profile" render={(props) => (
             !auth.isAuthenticated() ? (
-              <Redirect to="/home"/>
+              <Redirect to="/" />
             ) : (
               <Profile auth={auth} {...props} />
             )
@@ -55,7 +62,17 @@ export const makeMainRoutes = () => {
           <Route exact path="/about" component={ About } /> 
           <Route exact path="/contact" component={ Contact } /> 
           <Route exact path="/catalog" component={ Catalog } />
-          <Route exact path="/shop" component={ Shop } /> 
+          <Route exact path="/shop" component={ Shop } />
+          <Route exact path="/kihomac" render={(props) => <Products auth={auth} {...props} />} />
+          <Route exact path="/behsfootball" render={(props) => <Products auth={auth} {...props} />} />
+          <Route exact path="/addproduct" render={(props) => (
+            !auth.isAuthenticated() ? (
+              <Redirect to="/" />
+            ) : (
+              <AddProduct auth={auth}{...props} />
+            )
+            )} />
+            <Route exact path="/product/:id" render={(props) => <ProductDetails auth={auth}{...props} />} />
         </div>
       </BrowserRouter>
     </Provider>

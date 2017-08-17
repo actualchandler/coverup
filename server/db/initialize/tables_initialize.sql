@@ -13,11 +13,15 @@ CREATE TABLE IF NOT EXISTS orders (
 );
 
 CREATE TABLE IF NOT EXISTS products (
-  product_id SERIAL PRIMARY KEY,
-  name text,
+  id SERIAL PRIMARY KEY,
   description text,
+  fabric text,
   price decimal,
-  image_url text
+  image_url text,
+  sizes text,
+  colors text,
+  shop text,
+  product_id integer
 );
 
 CREATE TABLE IF NOT EXISTS product_in_order (
