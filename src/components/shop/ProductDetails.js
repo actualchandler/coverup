@@ -1,50 +1,78 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { Field, reduxForm } from 'redux-form'
-import _ from 'lodash'
+import { reduxForm } from 'redux-form'
+import { addToCart } from '../../actions/index'
 
 import './shop.css'
 
 // *** actions ***
 import { fetchProduct } from '../../actions/index'
-   class ProductsIndex extends Component {
+
+  class ProductsIndex extends Component {
      constructor(props){
        super(props)
        this.state = {
-        color: ''
-        , size: ''
-       }
-
+         color: ''
+         , size: ''
+         , qty: ''
+         , profile: {}
+      }
       this.handleColorChange = this.handleColorChange.bind(this)
       this.handleSizeChange = this.handleSizeChange.bind(this)
-      this.handleSubmit = this.handleSubmit.bind(this)
+      this.handleQtyChange = this.handleQtyChange.bind(this)
      }
 
-   componentDidMount() {
+
+   componentWillMount() {
       this.props.fetchProduct(this.props.match.params.id)
-   }
+      this.setState({ profile: {} })
 
-     goTo(route) {
-            this.props.history.replace(`/${route}`)
-      }
-
-    onSubmit(values){
-       console.log(values)
-      }
+      const { userProfile, getProfile } = this.props.auth
+        if (!userProfile) {
+          getProfile((err, profile) => {
+            this.setState({ profile })
+          })
+        } else {
+          this.setState({ 
+            profile: userProfile 
+          })
+        }
+     }
         
     handleColorChange(event) {
-      console.log(event.target.value)
       this.setState({color: event.target.value})
     }
 
     handleSizeChange(event) {
-      console.log(event.target.value)
-      this.setState({color: event.target.value})
+      this.setState({size: event.target.value})
     }
 
-    handleSubmit(event) {
-      event.preventDefault();
-      console.log(`${this.state.color} ${this.state.size}`)
+    handleQtyChange(event) {
+      this.setState({qty: event.target.value})
+    }
+
+    onSubmit(values) {
+      const { isAuthenticated } = this.props.auth
+
+      if(!isAuthenticated()){
+          alert("Please Log In")
+      } else if (this.state.color === ''){
+        alert('Please Choose a Color')
+      } else if (this.state.size === ''){
+        alert('Please Choose a Size')
+      } else if (this.state.qty === ''){
+        alert('Please Select Quantity')
+      } else {
+        let values = {
+          color: this.state.color
+          , size: this.state.size
+          , qty: this.state.qty
+          , userID: this.state.profile.sub
+        }
+        this.props.addToCart(values, () => {
+          alert('Product Added to Cart')
+      })
+      }
     }
 
       colorOptions(colors){
@@ -55,8 +83,8 @@ import { fetchProduct } from '../../actions/index'
          })
       }
 
-      sizeOptions(size){
-         return size.map(size => {
+      sizeOptions(sizes){
+         return sizes.map(size => {
             return (
                <option value={size} key={size}>{size}</option>
             )
@@ -64,6 +92,8 @@ import { fetchProduct } from '../../actions/index'
       }
 
    renderProduct() {
+     const { handleSubmit } = this.props
+
       // If there is no product, return: 'Loading...'
       if(!this.props.description) {
          return (
@@ -74,23 +104,6 @@ import { fetchProduct } from '../../actions/index'
       } else {
          let colors = this.props.colors.split(', ')
          let sizes = this.props.sizes.split(', ')
-         let price = 0
-
-         function setPrice(){
-           if(this.state.size === ''){
-             price = parseInt(this.props.price, 10)
-             return price
-           } else if (this.state.size === 'XXL'){
-            price += 2
-            return price
-           } else if(this.state.size === 'XXXL'){
-             price += 3
-             return price
-           } else if(this.state.size === 'XXXXL'){
-             price += 4
-             return price
-           }
-         }
 
          return (
             <div>
@@ -103,19 +116,22 @@ import { fetchProduct } from '../../actions/index'
                    <div className="col-md-3">
                      { this.props.description  }<br />
                      { this.props.fabric }<br />
-                     ${ price }<br />
+                     ${ this.props.price }<br />
                      { this.props.product_id }
 
                      {/* form */}
                      <div className="row">
-                        <form onSubmit={this.handleSubmit}>
+                         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}> 
                            <select value={this.state.value} onChange={this.handleColorChange}>
+                              <option value='' >Color</option>
                               { this.colorOptions(colors) }
                            </select>
                            <select value={this.state.value} onChange={this.handleSizeChange}>
+                             <option value='' >Size</option>
                               { this.sizeOptions(sizes) }
                            </select>
-                           <button type="submit" value="submit">Add to Cart</button>
+                           <input type="number" min='1' value={this.state.value} onChange={this.handleQtyChange} />
+                           <button className="btn">Add to Cart</button>
                         </form>
                      </div>
                   </div>
@@ -127,6 +143,8 @@ import { fetchProduct } from '../../actions/index'
    }
 
    render() {
+     
+
       return (
          <div>
               { this.renderProduct() }  
@@ -144,7 +162,8 @@ function mapStateToProps(state){
       , shop: state.products.shop
       , image_url: state.products.image_url
       , sizes: state.products.sizes
+      , product_id: state.products.product_id
    }
 }
 
-export default connect(mapStateToProps, { fetchProduct })(ProductsIndex)
+export default reduxForm({form: 'AddToCart' })(connect(mapStateToProps, { fetchProduct, addToCart })(ProductsIndex))

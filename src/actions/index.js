@@ -6,6 +6,7 @@ const ROOT_URL = CONFIG.ROOT_URL
 
 // *** actions ***
 export const CREATE_PRODUCT = 'create_product'
+export const ADD_TO_CART = 'add_to_cart'
 export const FETCH_PRODUCTS = 'fetch_products'
 export const FETCH_PRODUCT = 'fetch_product'
 
@@ -33,6 +34,16 @@ export function createProduct(values, callback) {
 
    return {
       type: CREATE_PRODUCT
+      , payload: request
+   }
+}
+
+export function addToCart(values, callback) {
+   const request = axios.post(`${ROOT_URL}order/add`, values)
+      .then(() => callback())
+
+   return {
+      type: ADD_TO_CART
       , payload: request
    }
 }

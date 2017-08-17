@@ -30,7 +30,6 @@ class Profile extends Component {
   render() {
     const { profile } = this.state
     const { isManager } = this.props.auth
-    console.log(`!isManager: ${!isManager(profile.sub)}`)
 
     if (!isManager(profile.sub)){
       return (
