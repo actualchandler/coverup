@@ -40,19 +40,19 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // CONTROLLERS //
-let userCtrl = require('./controllers/userCtrl')
+// let userCtrl = require('./controllers/userCtrl')
 let orderCtrl = require('./controllers/shop/orderCtrl')
 let productCtrl = require('./controllers/shop/productsCtrl')
 
 // USER ENDPOINTS //
+// app.get('/api/users/me/:user', userCtrl.read)
 
 // ORDER ENDPOINTS //
-app.put('/api/order/complete', orderCtrl.complete, orderCtrl.read)
-app.get('/api/order/history', orderCtrl.orderHistory)
-app.get('/api/order', orderCtrl.read)
-app.post('/api/order/add', orderCtrl.addToCart)
-app.put('/api/order/update/:id', orderCtrl.updateItemInCart)
-app.delete('/api/order/delete/:id', orderCtrl.deleteFromCart)
+app.post('/api/order/create', orderCtrl.createOrder)
+app.put('/api/order/complete/:userID', orderCtrl.completeOrder)
+app.get('/api/order/cart/:userID', orderCtrl.getCart)
+app.get('/api/order/history/:userID', orderCtrl.getOrders)
+
 
 // PRODUCTS ENDPOINTS //
 app.get('/api/products/:shop', productCtrl.read_shop)

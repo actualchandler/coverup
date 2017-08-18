@@ -3,14 +3,11 @@
 let app = require('../../server.js')
 let db = app.get('db')
 
-// EXPORT METHODS
-// ============================================================
 module.exports = {
 
   // CRUD METHODS
   // ============================================================
   read_shop: (req, res, next) => {
-    console.log(req.params.shop)
     db.product.read_shop([req.params.shop], (err, product) => {
       if (err) {
         console.log('products_read_shop: ', err)

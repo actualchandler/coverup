@@ -1,14 +1,14 @@
 import axios from 'axios'
 
-// *** variables ***
+// *** VARIABLES ***
 import { CONFIG } from './config.js'
 const ROOT_URL = CONFIG.ROOT_URL
 
-// *** actions ***
-export const CREATE_PRODUCT = 'create_product'
-export const ADD_TO_CART = 'add_to_cart'
+// *** ACTIONS ***
+// Products
 export const FETCH_PRODUCTS = 'fetch_products'
 export const FETCH_PRODUCT = 'fetch_product'
+export const CREATE_PRODUCT = 'create_product'
 
 export function fetchProducts(shop) {
    const request = axios.get(`${ROOT_URL}products${shop}`)
@@ -38,8 +38,13 @@ export function createProduct(values, callback) {
    }
 }
 
+// Cart
+export const ADD_TO_CART = 'add_to_cart'
+export const FETCH_CART = 'fetch_cart'
+export const FETCH_HISTORY = 'fetch_history'
+
 export function addToCart(values, callback) {
-   const request = axios.post(`${ROOT_URL}order/add`, values)
+   const request = axios.post(`${ROOT_URL}order/create`, values)
       .then(() => callback())
 
    return {
@@ -48,11 +53,32 @@ export function addToCart(values, callback) {
    }
 }
 
-export function getMe() {
-   const request = axios.get(`${ROOT_URL}api/me`)
+export function fetchCart(userID){
+   const request = axios.get(`${ROOT_URL}order/cart/${userID}`)
 
    return {
-      type: CREATE_PRODUCT, 
+      type: FETCH_CART
+      , payload: request
+   }
+}
+
+export function fetchHistory(userID){
+   const request = axios.get(`${ROOT_URL}order/history/${userID}`)
+
+   return {
+      type: FETCH_HISTORY
+      , payload: request
+   }
+}
+
+// User
+export const GET_ME = 'get_me'
+
+export function getMe(user) {
+   const request = axios.get(`${ROOT_URL}users/me/${user}`)
+
+   return {
+      type: GET_ME, 
       payload: request
    }
 }
