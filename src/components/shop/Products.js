@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Panel } from 'react-bootstrap' 
 import _ from 'lodash'
-import { Panel } from 'react-bootstrap'
 
 import './shop.css'
 

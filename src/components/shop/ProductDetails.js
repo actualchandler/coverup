@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { reduxForm } from 'redux-form'
-import { addToCart } from '../../actions/index'
 
 import './shop.css'
 
 // *** actions ***
 import { fetchProduct } from '../../actions/index'
+import { addToCart } from '../../actions/index'
 
   class ProductsIndex extends Component {
      constructor(props){
@@ -68,6 +68,8 @@ import { fetchProduct } from '../../actions/index'
           , size: this.state.size
           , qty: this.state.qty
           , userID: this.state.profile.sub
+          , product_id: this.props.product_id
+          , price: this.props.price
         }
         this.props.addToCart(values, () => {
           alert('Product Added to Cart')
