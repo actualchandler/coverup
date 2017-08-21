@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { Panel, Button } from 'react-bootstrap'
+
+// Components
 import Cart from './Cart'
 import OrderHistory from './OrderHistory'
 
-export default class User extends Component {
+class User extends Component {
 
   goTo(route){
     this.props.history.replace(`/${route}`)
@@ -12,41 +14,20 @@ export default class User extends Component {
   logout() {
     this.props.auth.logout()
   }
-
-  componentWillMount() {
-    this.setState({ 
-      profile: {} 
-    })
-
-
-    const { userProfile, getProfile } = this.props.auth
-    if (!userProfile) {
-      getProfile((err, profile) => {
-        this.setState({ profile })
-      })
-    } else {
-      this.setState({ 
-        profile: userProfile 
-      })
-    }
-  }
-
-  componenetDidMount(){
-    this.props.fetchCart(this.state.profile.sub)
-  }
    
    render() {
-      const { profile } = this.state
+      const { profile } = this.props
+
       return (
          <div className="container">
                  <div className="profile-area">
                    <h1>{profile.name}</h1>
                    <Panel header="Your Account">
                        <Panel header="Cart">
-                         <Cart userID={this.state.profile.sub} />
+                         <Cart auth={ this.props.auth } userID={ profile.sub } />
                        </Panel>
                        <Panel header="Order History">
-                         <OrderHistory userID={this.state.profile.sub} />
+                         <OrderHistory userID={ profile.sub } />
                        </Panel>
                    <Button
                        bsStyle="primary"
@@ -61,3 +42,5 @@ export default class User extends Component {
       )
    }
 }
+
+export default User

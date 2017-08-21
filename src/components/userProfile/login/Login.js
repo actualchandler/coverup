@@ -42,9 +42,9 @@ class App extends Component {
                   </Button>
                 )
             }
-        <div className="container">
+        {/* <div className="container">
           {this.props.children}
-        </div>
+        </div> */}
       </div>
     );
   }
