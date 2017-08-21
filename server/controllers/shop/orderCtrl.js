@@ -26,11 +26,13 @@ module.exports = {
    },
 
    getCart: (req, res, next) => {
+      console.log(req.params.userID)
       db.order.get_cart([req.params.userID], (err, cart) => {
          if (err) {
             console.log('Get cart ERR', err)
             return res.status(500).send(err)
          }
+         // console.log('Getting Cart', cart)
          return res.status(200).send(cart)
       })
    },
@@ -42,6 +44,16 @@ module.exports = {
             return res.status(500).send(err)
          }
          return res.status(200).send(history)
+      })
+   },
+
+   deleteItem: (req, res, next) => {
+      db.order.delete_item([req.params.userID, req.params.orderID], (err, cart) => {
+         if(err) {
+            console.log('Delete Item ERR', err)
+            return res.status(500).send(err)
+         }
+         return res.status(200).send(cart)
       })
    }
    

@@ -40,6 +40,7 @@ export function createProduct(values, callback) {
 
 // Cart
 export const ADD_TO_CART = 'add_to_cart'
+export const DELETE_ITEM = 'delete_item'
 export const FETCH_CART = 'fetch_cart'
 export const FETCH_HISTORY = 'fetch_history'
 
@@ -49,6 +50,15 @@ export function addToCart(values, callback) {
 
    return {
       type: ADD_TO_CART
+      , payload: request
+   }
+}
+
+export function deleteItem(userID, orderID) {
+   const request = axios.delete(`${ROOT_URL}order/delete/${userID}/${orderID}`)
+
+   return {
+      type: DELETE_ITEM
       , payload: request
    }
 }

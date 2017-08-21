@@ -50,6 +50,7 @@ let productCtrl = require('./controllers/shop/productsCtrl')
 // ORDER ENDPOINTS //
 app.post('/api/order/create', orderCtrl.createOrder)
 app.put('/api/order/complete/:userID', orderCtrl.completeOrder)
+app.delete('/api/order/delete/:userID/:orderID', orderCtrl.deleteItem)
 app.get('/api/order/cart/:userID', orderCtrl.getCart)
 app.get('/api/order/history/:userID', orderCtrl.getOrders)
 
