@@ -1,41 +1,60 @@
+
 import React, { Component } from 'react'
-import Manager from './Manager'
+import _ from 'lodash'
+
+// ** Components
 import User from './User'
+import Manager from './Manager'
+
+// ** Style
 import './profile.css'
 
 class Profile extends Component {
-  componentWillMount() {
-    this.setState({ 
-      profile: {} 
-    })
+   constructor(props) {
+      super(props)
+      this.state = {
+         profile: {}
+      }
+   }
 
-    const { userProfile, getProfile } = this.props.auth
-    if (!userProfile) {
-      getProfile((err, profile) => {
-        this.setState({ profile })
-      })
-    } else {
-      this.setState({ 
-        profile: userProfile 
-      })
-    }
-  }
-
-  render() {
-    const { profile } = this.state
-    const { isManager } = this.props.auth
-
-      return (
-        <div>
-          { !isManager(profile.sub) ? (
-            <User auth={ this.props.auth } profile={ profile }/>
-          ) : (
-            <Manager auth={ this.props.auth } />
-          )}
-        </div>
+   componentWillMount(){
+      const { userProfile, getProfile } = this.props.auth
+  
+      if (!userProfile) {
+        getProfile((err, profile) => {
+          this.setState({ profile })
+        })
+      } else (
+        this.setState({
+          profile: userProfile
+        })
       )
-    }
-    
-}
+      }
 
-export default Profile
+    render() {
+      const { email } = this.state.profile
+
+      if(_.isEmpty(this.state.profile)){
+        return (
+          <div>
+            Loading....
+          </div>
+        )
+      } else if(this.props.auth.isManager(email)){
+        return (
+          <div>
+              <Manager auth={ this.props.auth }/>
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <User logout = { this.props.auth.logout } profile={ this.state.profile } />
+          </div>
+        )
+      }
+      }
+      
+  }
+  
+  export default Profile

@@ -5,8 +5,8 @@ import { reduxForm } from 'redux-form'
 import './shop.css'
 
 // *** actions ***
-import { fetchProduct } from '../../actions/index'
-import { addToCart } from '../../actions/index'
+import { fetchProduct } from '../../actions/product_actions'
+import { addToCart } from '../../actions/cart_actions'
 
   class ProductsIndex extends Component {
      constructor(props){
@@ -67,7 +67,7 @@ import { addToCart } from '../../actions/index'
           color: this.state.color
           , size: this.state.size
           , qty: this.state.qty
-          , userID: this.state.profile.sub
+          , email: this.state.profile.email
           , product_id: this.props.product_id
           , price: this.props.price
         }
@@ -118,7 +118,7 @@ import { addToCart } from '../../actions/index'
                    <div className="col-md-3">
                      { this.props.description  }<br />
                      { this.props.fabric }<br />
-                     ${ this.props.price }<br />
+                     { this.props.price }<br />
                      { this.props.product_id }
 
                      {/* form */}

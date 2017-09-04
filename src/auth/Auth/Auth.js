@@ -9,7 +9,7 @@ export default class Auth {
     redirectUri: AUTH_CONFIG.callbackUrl,
     audience: `https://${AUTH_CONFIG.domain}/userinfo`,
     responseType: 'token id_token',
-    scope: 'openid profile'
+    scope: 'openid profile email'
   });
 
   userProfile;
@@ -87,8 +87,8 @@ export default class Auth {
   }
 
     // Check if current user is manager
-  isManager(userID) {
-    if(userID === AUTH_CONFIG.managerID) {
+  isManager(user_email) {
+    if(user_email === AUTH_CONFIG.managerID) {
       return true
     }
     return false

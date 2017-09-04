@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { FETCH_PRODUCTS, FETCH_PRODUCT } from '../actions/index'
+import { FETCH_PRODUCTS, FETCH_PRODUCT } from '../actions/product_actions'
 
 export default function(state = {}, action){
    switch(action.type){

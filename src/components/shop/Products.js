@@ -6,7 +6,7 @@ import _ from 'lodash'
 import './shop.css'
 
 // *** actions ***
-import { fetchProducts } from '../../actions/index'
+import { fetchProducts } from '../../actions/product_actions'
 
 class ProductsIndex extends Component {
      goTo(route) {
@@ -46,7 +46,6 @@ class ProductsIndex extends Component {
 }
 
 function mapStateToProps(state){
-    console.log(state.products)
    return { 
       products: state.products
    }
