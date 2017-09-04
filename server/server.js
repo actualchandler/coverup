@@ -12,6 +12,7 @@ let config = require('./config')
 // EXPRESS
 let app = module.exports = express()
 
+ap.user(express.static(__dirname + '/../build'))
 app.use(bodyParser.json())
 app.use(cors())
 
@@ -64,6 +65,12 @@ app.post('/api/product/new', productCtrl.create)
 
 // *** CONNECTION ***
 let port = config.PORT
+
+const path = require('path')
+
+app.get('/*', (req, res) => {
+   res.sendFile(path.join(__dirname, '..', 'build', 'index.html'))
+})
 
 app.listen(port, () => {
    console.log(`Listening on ${port}`)
