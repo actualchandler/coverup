@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
-import { ContactMessage } from '../../../actions/index'
+// import { ContactMessage } from '../../../actions/index'
 
 class Contact extends Component {
    renderField(field){

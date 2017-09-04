@@ -37,7 +37,6 @@ const handleAuthentication = (nextState, replace) => {
       }
 }
 
-
 const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore)
 
 export const makeMainRoutes = () => {

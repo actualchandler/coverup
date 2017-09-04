@@ -9,6 +9,6 @@ module.exports = {
       domain: 'actualchandler.auth0.com'
       , clientID: 'kD6U41TBR5sVFJnOYO12QZjeymZna4Ax'
       , clientSecret: 'KOjhVAcf3iqWqv6y_EFSi4tRVIdm0lrLdSSYSchorxwYZEv8qvxoDa0p3yq5YxU4'
-      , callbackURL: 'http://localhost:3005/callback'
+      , callbackURL: `http://localhost:${port}/auth/callback`
    }
 }

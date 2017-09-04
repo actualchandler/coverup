@@ -35,32 +35,31 @@ dbSetup.run()
 
 
 // SESSION AND PASSPORT //
-let passport = require('./services/passport')
-app.use(passport.initialize())
-app.use(passport.session())
+// let passport = require('./services/passport')
+// app.use(passport.initialize())
+// app.use(passport.session())
 
 // CONTROLLERS //
-// let userCtrl = require('./controllers/userCtrl')
+let userCtrl = require('./controllers/userCtrl')
 let orderCtrl = require('./controllers/shop/orderCtrl')
 let productCtrl = require('./controllers/shop/productsCtrl')
 
 // USER ENDPOINTS //
-// app.get('/api/users/me/:user', userCtrl.read)
+app.get('/api/users/me/:email', userCtrl.me)
 
 // ORDER ENDPOINTS //
-app.post('/api/order/create', orderCtrl.createOrder)
-app.put('/api/order/complete/:userID', orderCtrl.completeOrder)
-app.delete('/api/order/delete/:userID/:orderID', orderCtrl.deleteItem)
-app.get('/api/order/cart/:userID', orderCtrl.getCart)
-app.get('/api/order/history/:userID', orderCtrl.getOrders)
+app.put('/api/order/complete/:id', orderCtrl.complete, orderCtrl.read)
+app.get('/api/order/history/:email', orderCtrl.orderHistory)
+app.get('/api/order/:email', orderCtrl.read)
+app.post('/api/order/add', orderCtrl.addToCart)
+app.put('/api/order/update/:id', orderCtrl.updateItemInCart)
+app.delete('/api/order/delete/:id', orderCtrl.deleteFromCart)
 
 
 // PRODUCTS ENDPOINTS //
 app.get('/api/products/:shop', productCtrl.read_shop)
 app.get('/api/product/:id', productCtrl.read_id)
 app.post('/api/product/new', productCtrl.create)
-
-
 
 
 // *** CONNECTION ***

@@ -1,34 +1,44 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { Panel, Button } from 'react-bootstrap'
+
 
 // Components
 import Cart from './Cart'
 import OrderHistory from './OrderHistory'
 
+// Actions
+import { fetchCart } from '../../actions/cart_actions' 
+import { fetchHistory } from '../../actions/cart_actions' 
+
 class User extends Component {
 
-  goTo(route){
-    this.props.history.replace(`/${route}`)
-  }
-
   logout() {
-    this.props.auth.logout()
+    this.props.logout()
   }
-   
-   render() {
-      const { profile } = this.props
 
+  componentWillMount(){
+    const { email } = this.props.profile
+
+    this.props.fetchCart(email)
+    this.props.fetchHistory(email)
+
+  }
+
+  render() {
       return (
          <div className="container">
                  <div className="profile-area">
-                   <h1>{profile.name}</h1>
                    <Panel header="Your Account">
+
                        <Panel header="Cart">
-                         <Cart auth={ this.props.auth } userID={ profile.sub } />
+                         <Cart cart={ this.props.cart } />
                        </Panel>
+
                        <Panel header="Order History">
-                         <OrderHistory userID={ profile.sub } />
+                         <OrderHistory history={ this.props.history} />
                        </Panel>
+
                    <Button
                        bsStyle="primary"
                        className="btn-margin"
@@ -43,4 +53,11 @@ class User extends Component {
    }
 }
 
-export default User
+function mapStateToProps(state){
+  return {
+    cart: state.order
+    , history: state.history
+  }
+}
+
+export default connect(mapStateToProps, { fetchCart, fetchHistory })(User)

@@ -25,7 +25,7 @@ module.exports = {
         return res.status(500).send(err)
       }
 
-      console.log('Getting product with ID:', req.params.id)
+      // console.log('Getting product with ID:', req.params.id)
       return res.status(200).send(product[0])
     })
   },
